@@ -13,5 +13,12 @@
         <th>Name</th>
         <th>Purpose</th>
         <th>Optional</th>
+        <th>Default value</th>
+    </tr>
+    <tr>
+        <td>PORT</td>
+        <td>Setting the api port</td>
+        <td>Yes</td>
+        <td>8080</td>
     </tr>
 </table>
