@@ -1,4 +1,4 @@
-module surver-renderer-api
+module github.com/yael-castro/survey-renderer-api
 
 go 1.16
 

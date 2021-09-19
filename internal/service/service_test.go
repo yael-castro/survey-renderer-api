@@ -6,8 +6,9 @@ import (
 	"io"
 	"reflect"
 	"strconv"
-	"surver-renderer-api/internal/model"
 	"testing"
+
+	"github.com/yael-castro/survey-renderer-api/internal/model"
 )
 
 var (

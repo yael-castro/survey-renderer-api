@@ -5,13 +5,15 @@ import (
 	"bytes"
 	"io"
 	"io/fs"
-	"surver-renderer-api/internal/model"
 	"sync"
 	"text/template"
+
+	"github.com/yael-castro/survey-renderer-api/internal/model"
 )
 
 // surveyTemplate use to survey an template
 var surveyTemplate *template.Template
+
 // onceParseTemplate used to initialize the survey template once
 var onceParseTemplate sync.Once
 

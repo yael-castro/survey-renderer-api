@@ -2,9 +2,8 @@
 package routes
 
 import (
-	"surver-renderer-api/internal/handler"
-
 	"github.com/labstack/echo/v4"
+	"github.com/yael-castro/survey-renderer-api/internal/handler"
 )
 
 // SetAll use to make and set all endpoint using all handlers contained in handler.Handler structure
