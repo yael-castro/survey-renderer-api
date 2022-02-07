@@ -24,6 +24,8 @@ type Configuration struct {
 	Database string
 	User     string
 	Password string
+	// Defines options like +srv in MongoDB and SSL in PostgreSQL
+	Secure bool
 }
 
 // String build and returns a URI used to establish a connection to any repository defined by the Type embbed in the Configuration structure
@@ -32,13 +34,21 @@ type Configuration struct {
 func (c Configuration) String() string {
 	switch c.Type {
 	case NoSQL:
+		if c.Secure {
+			return fmt.Sprintf(
+				"mongodb+srv://%s:%s@%s", //?maxPoolSize=%s",
+				c.User,
+				c.Password,
+				c.Host,
+			)
+		}
+
 		return fmt.Sprintf(
 			"mongodb://%s:%s@%s:%d", //?maxPoolSize=%s",
 			c.User,
 			c.Password,
 			c.Host,
 			c.Port,
-			// os.Getenv("MONGO_POOL_SIZE"),
 		)
 	}
 
