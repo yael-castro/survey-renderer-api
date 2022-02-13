@@ -18,12 +18,14 @@ var surveyTemplate *template.Template
 var onceParseTemplate sync.Once
 
 // NewSurveyTemplate returns a survey template (singleton).
+//
 // Initialize singleton with ParseSurveyTemplate
 func NewSurveyTemplate() *template.Template {
 	return surveyTemplate
 }
 
 // ParseSurveyTemplate use to parse and save the survey template to can be use NewSurveyTemplate.
+//
 // Important: must be called before of the function NewSurveyTemplate
 func ParseSurveyTemplate(fileSystem fs.FS, name string) (err error) {
 	onceParseTemplate.Do(func() {

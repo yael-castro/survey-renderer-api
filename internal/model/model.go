@@ -17,15 +17,15 @@ type (
 		Questions
 	}
 
-	// Questions array of questions
-	Questions []Question
+	// Questions alias for []Question
+	Questions = []Question
 
 	// Question question of survey
 	Question struct {
-		Text        string   `json:"text"`
+		Text string `json:"text"`
 		// Suggestions array of string used to show suggestions to answer a open question (show only if Options field is nil)
 		Suggestions []string `json:"suggestions"`
 		// Options array of string used to show unique options to answer the question
-		Options     []string `json:"options"`
+		Options []string `json:"options"`
 	}
 )
