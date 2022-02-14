@@ -26,7 +26,7 @@ func NewMongoDatabase(config Configuration) (mongoDatabase *mongo.Database, err 
 	return
 }
 
-// NewMD works same that function NewMongoDatabase but it does not return an error instead it panics
+// NewMD works same that function NewMongoDatabase but, it does not return an error instead it panics
 func NewMD(config Configuration) *mongo.Database {
 	mongoDatabase, err := NewMongoDatabase(config)
 	if err != nil {
