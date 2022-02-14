@@ -1,4 +1,4 @@
-// Package model contains all data transfer objects (dto)
+// Package model contains domain objects, errors, application data types
 package model
 
 type (
@@ -10,9 +10,9 @@ type (
 		Method string `json:"method"`
 		// Title survey title
 		Title string `json:"title"`
-		// Prompt survey prompt (description)
+		// Description survey prompt
 		Description string `json:"description"`
-		// Language language of survey
+		// Language defines the language that use the survey
 		Language string `json:"language"`
 		Questions
 	}
@@ -20,10 +20,10 @@ type (
 	// Questions alias for []Question
 	Questions = []Question
 
-	// Question question of survey
+	// Question contains information about question of survey
 	Question struct {
 		Text string `json:"text"`
-		// Suggestions array of string used to show suggestions to answer a open question (show only if Options field is nil)
+		// Suggestions array of string used to show suggestions to answer an open question (show only if Options field is nil)
 		Suggestions []string `json:"suggestions"`
 		// Options array of string used to show unique options to answer the question
 		Options []string `json:"options"`

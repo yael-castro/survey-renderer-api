@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// NewMongoClient establish connection with a MongoDB database using the Configuration passed as parameter
+// NewMongoDatabase establish connection with a MongoDB database using the Configuration passed as parameter
 func NewMongoDatabase(config Configuration) (mongoDatabase *mongo.Database, err error) {
 	mongoClient, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(config.String()))
 	if err != nil {
