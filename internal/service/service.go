@@ -3,44 +3,48 @@ package service
 
 import (
 	"bytes"
-	"github.com/yael-castro/survey-renderer-api/internal/model"
 	"github.com/yael-castro/survey-renderer-api/internal/repository"
 	"html/template"
 	"io"
 )
 
-// TODO comment
+// SurveyProvider defines a provider of serialized survey data
 type SurveyProvider interface {
+	// ProvideSurvey search for a survey by id and save it in the io.Reader
 	ProvideSurvey(string) (io.Reader, error)
 }
 
-// TODO comment
+// _ "implement" constraint for SurveyTemplateProvider
+var _ SurveyProvider = SurveyTemplateProvider{}
+
+// SurveyTemplateProvider provider of serialized survey data in html
 type SurveyTemplateProvider struct {
 	repository.SurveyFinder
-	SurveyRenderer
-}
-
-// TODO comment
-func (SurveyTemplateProvider) ProvideSurvey(string) (io.Reader, error) {
-	panic(`implement me`)
-}
-
-// SurveyRenderer use to build a survey template
-type SurveyRenderer interface {
-	// RenderSurvey use to render survey and save it in io.Reader
-	RenderSurvey(model.Survey) (io.Reader, error)
-}
-
-// SurveyTemplateRenderer using a *template.Template to constructs an html page based on model.Survey
-type SurveyTemplateRenderer struct {
 	*template.Template
 }
 
-// RenderSurvey takes the data from model.Survey to render a html page in a io.Reader
-func (sr SurveyTemplateRenderer) RenderSurvey(survey model.Survey) (io.Reader, error) {
+// ProvideSurvey search a model.Survey to then render it in a html page returned in io.Reader
+func (p SurveyTemplateProvider) ProvideSurvey(surveyId string) (io.Reader, error) {
+	survey, err := p.FindSurvey(surveyId)
+	if err != nil {
+		return nil, err
+	}
+
 	buffer := bytes.NewBuffer([]byte{})
-
-	err := sr.Execute(buffer, survey)
-
+	err = p.Execute(buffer, survey)
 	return buffer, err
+}
+
+// _ "implement" constraint for SurveyProviderMock
+var _ SurveyProvider = SurveyProviderMock{}
+
+// SurveyProviderMock mock of SurveyProvider used to testing
+type SurveyProviderMock struct {
+	reader io.Reader
+	error
+}
+
+// ProvideSurvey returns m.reader and m.error (the string parameter is ignored)
+func (m SurveyProviderMock) ProvideSurvey(string) (io.Reader, error) {
+	return m.reader, m.error
 }
