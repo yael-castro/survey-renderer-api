@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// NewMongoClient establish connection with a MongoDB database using the Configuration passed as parameter
+// NewMongoDatabase establish connection with a MongoDB database using the Configuration passed as parameter
 func NewMongoDatabase(config Configuration) (mongoDatabase *mongo.Database, err error) {
 	mongoClient, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(config.String()))
 	if err != nil {
@@ -26,7 +26,7 @@ func NewMongoDatabase(config Configuration) (mongoDatabase *mongo.Database, err 
 	return
 }
 
-// NewMD works same that function NewMongoDatabase but it does not return an error instead it panics
+// NewMD works same that function NewMongoDatabase but, it does not return an error instead it panics
 func NewMD(config Configuration) *mongo.Database {
 	mongoDatabase, err := NewMongoDatabase(config)
 	if err != nil {

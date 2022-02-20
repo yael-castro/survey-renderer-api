@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	// ttFindSurvey tatble testing used to prove the interface SurveyFinder
+	// ttFindSurvey testing table used to prove the interface SurveyFinder
 	ttFindSurvey = []struct {
 		SurveyFinder
 		surveyId       string
@@ -33,7 +33,6 @@ var (
 			SurveyFinder: SurveyStorageNoSQL{
 				Collection: NewMD(localSettings).Collection("no-collection"),
 			},
-			surveyId:      "",
 			expectedError: mongo.ErrNoDocuments,
 		},
 	}

@@ -8,7 +8,7 @@ type Type uint
 
 // Defines correct values for Type
 const (
-	// NoSQL defines an NoSQL storage oriented to documents like MongoDB
+	// NoSQL defines an NoSQL storage oriented for documents like MongoDB
 	NoSQL Type = iota
 )
 
@@ -24,7 +24,7 @@ type Configuration struct {
 	Database string
 	User     string
 	Password string
-	// Defines options like +srv in MongoDB and SSL in PostgreSQL
+	// Secure defines options like +srv in MongoDB and SSL in PostgreSQL
 	Secure bool
 }
 
@@ -52,5 +52,5 @@ func (c Configuration) String() string {
 		)
 	}
 
-	panic(fmt.Sprintf(`type "%d" is not supported by Configuration.String()`, c.Type))
+	panic(fmt.Sprintf(`type "%d" is not supported by Configuration.String`, c.Type))
 }

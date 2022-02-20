@@ -5,16 +5,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/labstack/echo/v4"
+	"github.com/yael-castro/survey-renderer-api/internal/dependency"
 	"github.com/yael-castro/survey-renderer-api/internal/handler"
-	"github.com/yael-castro/survey-renderer-api/internal/routes"
-	"github.com/yael-castro/survey-renderer-api/internal/service"
 )
 
-//go:embed templates
-var templates embed.FS
-
 const defaultPort = "8080"
+
+//go:embed templates/index.gohtml
+var defaultFileSystem embed.FS
 
 func main() {
 	port := os.Getenv("PORT")
@@ -22,14 +20,21 @@ func main() {
 		port = defaultPort
 	}
 
-	err := service.ParseSurveyTemplate(templates, "templates/index.gohtml")
+	// Initializing default log
+	log.SetFlags(log.Flags() | log.Lshortfile)
+
+	h := handler.New()
+
+	// Loading file system for embed files
+	dependency.FileSystem = defaultFileSystem
+
+	err := dependency.NewInjector(dependency.Default).Inject(h)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	e := echo.New()
-
-	routes.SetAll(e, handler.New())
+	// Building an initialized instance of *echo.Echo
+	e := handler.NewEcho(*h)
 
 	log.Fatal(e.Start(":" + port))
 }
