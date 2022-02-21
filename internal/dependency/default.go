@@ -31,7 +31,7 @@ func defaultProfile(i interface{}) (err error) {
 		Type:     repository.NoSQL,
 		Host:     os.Getenv("MONGO_HOST"),
 		Port:     mongoPort,
-		Database: os.Getenv("MONGO_HOST"),
+		Database: os.Getenv("MONGO_DB"),
 		User:     os.Getenv("MONGO_USER"),
 		Password: os.Getenv("MONGO_PASS"),
 		Secure:   os.Getenv("MONGO_SRV") == "true",
@@ -56,9 +56,7 @@ func defaultProfile(i interface{}) (err error) {
 			SurveyFinder: repository.SurveyStorageNoSQL{
 				Collection: mongoCollection,
 			},
-			SurveyRenderer: business.SurveyTemplateRenderer{
-				Template: surveyTemplate,
-			},
+			Template: surveyTemplate,
 		},
 	}
 
