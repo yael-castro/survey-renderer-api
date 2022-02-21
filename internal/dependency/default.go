@@ -2,9 +2,9 @@ package dependency
 
 import (
 	"fmt"
+	"github.com/yael-castro/survey-renderer-api/internal/business"
 	"github.com/yael-castro/survey-renderer-api/internal/handler"
 	"github.com/yael-castro/survey-renderer-api/internal/repository"
-	"github.com/yael-castro/survey-renderer-api/internal/service"
 	"html/template"
 	"io/fs"
 	"os"
@@ -52,11 +52,11 @@ func defaultProfile(i interface{}) (err error) {
 
 	// Initializing handler.TemplateProvider
 	h.TemplateProvider = handler.SurveyTemplateProvider{
-		SurveyProvider: service.SurveyTemplateProvider{
+		SurveyProvider: business.SurveyTemplateProvider{
 			SurveyFinder: repository.SurveyStorageNoSQL{
 				Collection: mongoCollection,
 			},
-			SurveyRenderer: service.SurveyTemplateRenderer{
+			SurveyRenderer: business.SurveyTemplateRenderer{
 				Template: surveyTemplate,
 			},
 		},

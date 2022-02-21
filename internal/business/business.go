@@ -1,5 +1,5 @@
-// Package service contains the business logic
-package service
+// Package business contains the business logic
+package business
 
 import (
 	"bytes"

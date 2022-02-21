@@ -2,7 +2,7 @@
 package handler
 
 import (
-	"github.com/yael-castro/survey-renderer-api/internal/service"
+	"github.com/yael-castro/survey-renderer-api/internal/business"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -29,7 +29,7 @@ var _ TemplateProvider = SurveyTemplateProvider{}
 
 // SurveyTemplateProvider build html pages for surveys based on a survey template
 type SurveyTemplateProvider struct {
-	service.SurveyProvider
+	business.SurveyProvider
 }
 
 // ProvideTemplate build a html page based on the model.Survey found by id
