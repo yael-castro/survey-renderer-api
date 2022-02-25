@@ -6,7 +6,7 @@ import "fmt"
 // Type defines which repository be used
 type Type uint
 
-// Defines correct values for Type
+// Supported values for Type
 const (
 	// NoSQL defines an NoSQL storage oriented for documents like MongoDB
 	NoSQL Type = iota
@@ -24,7 +24,7 @@ type Configuration struct {
 	Database string
 	User     string
 	Password string
-	// Secure defines options like +srv in MongoDB and SSL in PostgreSQL
+	// Secure defines options like +srv in MongoDB and SSL in Postgresql
 	Secure bool
 }
 
